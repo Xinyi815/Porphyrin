@@ -120,6 +120,7 @@ for bb1id in bb1_smiles:
                 os.makedirs(f'{molecule_name}')
                 os.chdir(f'{molecule_name}')
                 os.system(f'mv ../{molecule_name}.xyz .')
+                # if run this code in Jupter Notebook, the following command shoule be uncommanded
                 #os.environ['XTBHOME'] = "/home/xwu/miniconda3/pkgs/xtb-6.4.1-hf06ca72_0/share/xtb"
                 os.system(f'xtb {molecule_name}.xyz --gfn 1 --opt -T 48 > output_{molecule_name}.txt && xtb xtbopt.xyz --gfn 1 --vipea > vipea_{molecule_name}.txt')
                 os.chdir('../')
