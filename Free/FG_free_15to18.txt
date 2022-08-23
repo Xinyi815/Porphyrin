@@ -1,0 +1,1 @@
+Br/C1=C2C=C/C(N2)=C(C3=CC=C([N+]([O-])=O)C=C3)/C(C=C/4)=NC4=C(Br)/C5=CC=C(N5)/C(C6=CC=C([N+]([O-])=O)C=C6)=C7C=CC1=N/7

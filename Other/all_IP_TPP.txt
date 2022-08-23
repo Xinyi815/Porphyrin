@@ -1,0 +1,5 @@
+IP Fe_TPP = 6.4709
+IP Co_TPP = 6.459
+IP Ni_TPP = 6.6962
+IP Cu_TPP = 4.9631
+IP Zn_TPP = 6.717
