@@ -1,6 +1,3 @@
-import sys
-#sys.path.append('/Applications/anaconda3/lib/python3.8/site-packages')
-
 from rdkit import Chem 
 from rdkit.Chem import AllChem as rdkit
 from collections import defaultdict
@@ -24,9 +21,10 @@ from rdkit.Chem import AllChem
 from rdkit.Chem import rdDistGeom
 from rdkit.Chem import rdMolAlign
 from rdkit import RDLogger
-import logging
+# if run this code in Jupyter Notebook, the following command shoule be uncommanded
+#%matplotlib inline
 
-
+# see the structure of each created molecule
 def show_stk_mol(stk_mol):
     data = rdkit.MolToMolBlock(stk_mol.to_rdkit_mol())
     p = py3Dmol.view(
@@ -54,15 +52,15 @@ def rdkit_op(bb):
 
     return bb
 
-
+# Defines the name of each molecule, consisting of the type of Functional group as a substitute, the number of Cs on the linker, and the number of porphyrin units.
 FG_name = ['H','Py','DHP','C2Py','Ph','p-CP','m-CP','PhOH','Ph3OH','PhCHO','Ph2Me','Ph3Me','Ph2OMe','BSA','PhCN','NMA','PhNH2','PhNO2']
 linker_name = ['C2','C4','C6','C8']
 units_name = ['2','3','4','5','6','7','8','9','10']
 
-bb1_free = open ('FG_free.txt','r')
-linker = open ('linker.txt','r')
+bb1_free = open ('FG_free_smiles.txt','r')
+linker = open ('linker_smiles.txt','r')
 
-# Define BB dictionaries.
+# Define BB1, BB3 and linker dictionaries.
 bb1_smiles = {}
 bb3_smiles = {}
 for i, bb in enumerate(bb1_free.readlines()):
@@ -74,14 +72,14 @@ for i, li in enumerate(linker.readlines()):
     linker_smiles[i] = li.replace('\n','')
 
 
-# Iterate over BB1.
+# Iterate over BB1 (Initial porphyrin unit with 2 Br).
 for bb1id in bb1_smiles:
     bb1 = stk.BuildingBlock(bb1_smiles[bb1id], [stk.BromoFactory()])
     # Optimize with the MMFF force field.
     bb1 = rdkit_op(bb1)
     bb3_smiles[i] = bb1_smiles[bb1id].replace('Br/','')
 
-    # Iterate over BB3.
+    # Iterate over BB3 (Initial porphyrin unit with 1 Br).
     for bb3id in bb3_smiles:
         bb3 = stk.BuildingBlock(bb3_smiles[bb3id], [stk.BromoFactory()])
         # Optimize with the MMFF force field.
@@ -93,12 +91,13 @@ for bb1id in bb1_smiles:
                 smiles=linker_smiles[liid],
                 functional_groups=[stk.BromoFactory()],
             )
+
             # Iterate over repeat units.
             for no in range(0,9):
                 repeat_units = no
                 repeating_unit_str='CB'+'AB'*repeat_units +'C'
                 orientation_str = '0, '*(len(repeating_unit_str)-1)+'1'
-                # Set name based on iterations.
+                # Set molecule name based on iterations.
                 molecule_name = f'{FG_name[bb1id]}_{linker_name[liid]}_{units_name[no]}'
                 
                 #construct finial porphyrin arrays
@@ -108,7 +107,6 @@ for bb1id in bb1_smiles:
                         repeating_unit=repeating_unit_str,
                         num_repeating_units=1,
                         orientations=tuple(map(int, orientation_str.split(', '))),
-                        #optimizer=stk.MCHammer(),
                         optimizer=stk.Collapser(scale_steps=False),
 
                     ),
@@ -117,12 +115,14 @@ for bb1id in bb1_smiles:
                 # Write to files.
                 #porphyrin_noM.write(f'{molecule_name}.mol')
                 porphyrin_noM.write(f'{molecule_name}.xyz')
+                # Create a folder by molecular name
                 os.makedirs(f'{molecule_name}')
                 os.chdir(f'{molecule_name}')
                 os.system(f'mv ../{molecule_name}.xyz .')
-                # if run this code in Jupter Notebook, the following command shoule be uncommanded
+                # if run this code in Jupyter Notebook, the following command shoule be uncommanded. Note: Find where xtb is installed and change location in " "!
                 #os.environ['XTBHOME'] = "/home/xwu/miniconda3/pkgs/xtb-6.4.1-hf06ca72_0/share/xtb"
                 os.system(f'xtb {molecule_name}.xyz --gfn 1 --opt -T 48 > output_{molecule_name}.txt && xtb xtbopt.xyz --gfn 1 --vipea > vipea_{molecule_name}.txt')
                 os.chdir('../')
-            
+
+                #If you want to see the structure of each created molecule，the following command shoule be uncommanded
                 #show_stk_mol(porphyrin_noM

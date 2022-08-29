@@ -1,1 +1,0 @@
-Br/C1=C2C=C/C([N]/2)=C/C(C=C3)=NC3=C(Br)C4=CC=C([N]/4)C=C5C=CC1=N5

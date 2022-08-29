@@ -1,0 +1,6 @@
+Name, ExactMolWt, NumVE, HeavyAtom#, NHOH#, NOC#, NumHAcc#, NumHDo#, NumHeteroatoms, fr_Al_COO, fr_Al_OH, fr_Al_OH_noTert, fr_COO, fr_COO2, fr_C_O, fr_C_O_noCOO, fr_NH0, fr_NH1, fr_NH2, fr_allylic_oxid, fr_dihydropyridine, fr_methoxy, fr_nitrile, fr_nitro, fr_nitroso, fr_piperdine, MetalAN, #linker, #unit, IP, EA,  H-L gap
+Fe_TPP [668.166, 232, 49, 0, 4, 4, 0, 5, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 26, 0, 1, 6.471, 2.833, 0.219]
+Co_TPP [671.165, 233, 49, 0, 4, 4, 0, 5, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 0, 1, 6.459, 2.762, 1.356]
+Ni_TPP [670.167, 234, 49, 0, 4, 4, 0, 5, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28, 0, 1, 6.696, 1.952, 1.696]
+Cu_TPP [675.161, 235, 49, 0, 4, 4, 0, 5, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 29, 0, 1, 4.963, 1.997, 0.572]
+Zn_TPP [676.161, 226, 49, 0, 4, 4, 0, 5, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 1, 6.717, 2.021, 1.599]
