@@ -10,13 +10,13 @@ from tensorflow.keras.layers import Dense
 dataset = loadtxt('total_data_free.txt', delimiter=',')
 
 # split into input (X) and output (y) variables
-X = dataset[:, 0:29]
+X = dataset[:, 0:27]
 #print(f'X = {X}')
 y = dataset[:, 29]
 
 # define the keras model
 model = Sequential()
-model.add(Dense(30, input_shape=(29,),activation='relu'))
+model.add(Dense(30, input_shape=(27,),activation='relu'))
 model.add(Dense(25, ))
 model.add(Dense(20, ))
 model.add(Dense(15, ))
@@ -70,7 +70,7 @@ for i in range(10):
     print('%s => %.4f (expected %.4f)' % (X[i].tolist(), predictions[i], y[i]))
 
 # save model and architecture to single file
-model.save("model_free.h5")
+model.save("model_free_noEAIP.h5")
 print("Saved model to disk")
 
 n = list(range(len(X)))
@@ -83,4 +83,11 @@ plt.xlabel('No of porphyrin units')
 plt.ylabel('HL gap/eV')
 plt.legend()
 plt.tight_layout()
-plt.savefig("free.png")
+plt.savefig("free_noEAIP.png")
+
+# new 5 instances where we do not know the answer: H_C8_20, H_C8_30, H_C8_40, H_C8_50 and H_C8_100
+Xnew = np.array([[7268.08,2610,572,40,80,80,40,80,0,0,0,0,0,0,0,40,40,0,80,0,0,0,0,0,0,8,20],[10589.08,3810,832,60,120,120,60,120,0,0,0,0,0,0,0,60,60,0,120,0,0,0,0,0,0,8,30],[13910.08,5010,1092,80,160,160,80,160,0,0,0,0,0,0,0,80,80,0,160,0,0,0,0,0,0,8,40],[17231.08,6210,1352,100,200,200,100,200,0,0,0,0,0,0,0,100,100,0,200,0,0,0,0,0,0,8,50],[33836.08,12210,2652,200,400,400,200,400,0,0,0,0,0,0,0,200,200,0,400,0,0,0,0,0,0,8,100]])
+# make a prediction
+ynew = model.predict(Xnew)
+# show the inputs and predicted outputs
+print("X=%s, Predicted=%s" % (Xnew.tolist(), ynew))
