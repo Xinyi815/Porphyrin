@@ -38,7 +38,7 @@ model.compile(
 
 # fit the keras model on the dataset
 print('Training model...')
-historial = model.fit(X, y, epochs=1000, batch_size=12, verbose=True)
+historial = model.fit(X, y, epochs=1000, batch_size=18, verbose=True)
 print("Model trained!")
 
 # Metrics plots
