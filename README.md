@@ -1,12 +1,12 @@
 # Porphyrin Electronic Properties
-The main aim of this project is using stk to build both free and metal-based porphyrin chains and xtb to obtain the optimised structure and electronic properties. Then Keras - deep machine learning model to train our dataset and predict electronic properties of further configurations which are not considered in the constructed database.
+The main aim of this project is to use stk to build both free and metal-based (Fe,Co,Ni,Cu,Zn) porphyrin chains and xtb to obtain the optimised structure and electronic properties. Then Keras - deep machine learning model will be used to train our dataset and predict electronic properties of further configurations which are not considered in the constructed database.
 
 ## First part: building (stk) and optimisation (xtb)
 - For loop was used to build all the porphyrin arrays.
-- Then xtb used xyz files of constructed molecule to optimise and generate a series of files: The value of HOMO-LUMO (HL) gap can be found in the output_molecule_name.txt file; The values of electron affinity (EA) and ionisation potential (IP) can be found in the vipea_molecule_name.txt file. The xtbopt.xyz and xtbtopo.mol can be used to see the finial optimised structure. 
+- Then xtb used xyz files of constructed molecule to optimise and generate a series of files: The value of HOMO-LUMO (H-L) gap can be found in the output_molecule_name.txt file; The values of electron affinity (EA) and ionisation potential (IP) can be found in the vipea_molecule_name.txt file. The xtbopt.xyz and xtbtopo.mol can be used to see the finial optimised structure. 
 
 ## Obtain dataset
-- After xtb optimisation, the values HOMO-LUMO (HL) gap, electron affinity (EA) and ionisation potential (IP) of each molecule need to be abstracted.
+- After xtb optimisation, the values HOMO-LUMO (H-L) gap, electron affinity (EA) and ionisation potential (IP) of each molecule need to be abstracted.
 - Also, descriptors (the physicochemical properties for the molecules) should be obtained from xtbtopo.mol (remember to covert xtbtopo.mol to an RDKit mol!)
 Note: For free-based porphyrin chain: number of carbon atom in the linker and number of units are added to the descriptors; For metal-based porphyrin chain, atomic number of each metal center, number of carbon atom in the linker and number of units are added into the descriptors.
 - Then descriptors, EA, IP and HL were combined together to obtain our finial dataset file.
